@@ -3,6 +3,8 @@ spring:
     url: jdbc:mysql://localhost:53306/spring_boot_querydsl
     username: root
   jpa:
+    hibernate:
+      ddl-auto: create-drop
     show-sql: true
     properties:
       hibernate:
