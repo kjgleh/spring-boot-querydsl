@@ -8,6 +8,7 @@ import jakarta.persistence.Id
 @Entity(name = "members")
 class Member(
     var name: String,
+    var age: Int,
 ) {
 
     @Id

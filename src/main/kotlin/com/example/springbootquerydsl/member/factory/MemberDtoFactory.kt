@@ -9,6 +9,7 @@ object MemberDtoFactory {
         return MemberDto(
             id = member.id,
             name = member.name,
+            age = member.age,
         )
     }
 }

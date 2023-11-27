@@ -7,7 +7,8 @@ object MemberFactory {
 
     fun of(request: MemberCreateRequest): Member {
         return Member(
-            name = request.name
+            name = request.name,
+            age = request.age,
         )
     }
 }

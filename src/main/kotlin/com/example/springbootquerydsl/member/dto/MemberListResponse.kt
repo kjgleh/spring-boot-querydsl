@@ -1,7 +1,6 @@
 package com.example.springbootquerydsl.member.dto
 
-data class MemberDto(
+data class MemberListResponse(
     val id: Long,
     val name: String,
-    val age: Int,
 )
