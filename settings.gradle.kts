@@ -1,1 +1,1 @@
-rootProject.name = "spring-boot-querydsl"
+rootProject.name = "spring-querydsl"
