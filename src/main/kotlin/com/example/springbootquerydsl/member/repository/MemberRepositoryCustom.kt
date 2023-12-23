@@ -8,4 +8,8 @@ import org.springframework.data.domain.Pageable
 interface MemberRepositoryCustom {
     fun findList(filter: SearchFilter): List<Member>
     fun findPage(filter: SearchFilter, pageable: Pageable): Page<Member>
+    fun existByAge(age: Int): Boolean
+
+    // Locker 가 존재하는 회원 조회
+    fun findByLockerIsNotNull(): List<Member>
 }

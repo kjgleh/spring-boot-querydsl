@@ -37,6 +37,7 @@ dependencies {
     kapt("org.springframework.boot:spring-boot-configuration-processor")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("com.appmattus.fixture:fixture:1.2.0")
     testRuntimeOnly("com.h2database:h2")
 }
 

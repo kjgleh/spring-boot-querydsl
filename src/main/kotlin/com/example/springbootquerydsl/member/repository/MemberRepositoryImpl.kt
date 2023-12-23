@@ -3,9 +3,11 @@ package com.example.springbootquerydsl.member.repository
 import com.example.springbootquerydsl.member.dto.SearchFilter
 import com.example.springbootquerydsl.member.entity.Member
 import com.example.springbootquerydsl.member.entity.QMember.member
+import com.example.springbootquerydsl.locker.entity.QLocker.locker
 import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.dsl.BooleanExpression
 import com.querydsl.core.types.dsl.PathBuilder
+import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
 import org.springframework.data.domain.Page
@@ -45,6 +47,27 @@ class MemberRepositoryImpl(em: EntityManager) : MemberRepositoryCustom {
         return PageableExecutionUtils.getPage(content, pageable) { getTotalCount(booleanBuilder) }
     }
 
+    override fun existByAge(age: Int): Boolean {
+        return queryFactory
+            .select(member)
+            .from(member)
+            .where(eqAge(age))
+            .fetchFirst() != null
+    }
+
+    override fun findByLockerIsNotNull(): List<Member> {
+        return queryFactory
+            .select(member)
+            .from(member)
+            .where(
+                JPAExpressions
+                    .selectFrom(locker)
+                    .where(locker.memberId.eq(member.id))
+                    .exists()
+            )
+            .fetch()
+    }
+
     private fun SearchFilter.toPredicate(): BooleanBuilder {
         val booleanBuilder = BooleanBuilder()
 
@@ -68,5 +91,6 @@ class MemberRepositoryImpl(em: EntityManager) : MemberRepositoryCustom {
             .from(member)
             .where(booleanBuilder)
             .fetchOne() ?: 0
+
     }
 }
